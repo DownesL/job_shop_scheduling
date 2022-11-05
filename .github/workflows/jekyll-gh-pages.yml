@@ -48,5 +48,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3.5.1
+      - name: Deploy React to GitHub Pages
+        # You may pin to the exact commit or the version.
+        # uses: bitovi/github-actions-react-to-ghp@1782b3410beca05fb72bd089e5620790c0c4d883
+        uses: bitovi/github-actions-react-to-ghp@v1.2.0
+        with:
+          # Specifies the path of the static assets after building
+          path: /src/
+          # Specifies the command to run after npm ci for the build
+          build_command: npm install -g serve | serve -s build
