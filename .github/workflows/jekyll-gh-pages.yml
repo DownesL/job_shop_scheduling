@@ -56,4 +56,4 @@ jobs:
           # Specifies the path of the static assets after building
           path: /src/
           # Specifies the command to run after npm ci for the build
-          build_command: npm install -g serve | serve -s build
+          build_command: npm run build
