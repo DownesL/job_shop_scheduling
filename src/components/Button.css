@@ -1,0 +1,28 @@
+.btnSection>div {
+    display: flex;
+    justify-content: center;
+}
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    width: 8rem;
+    margin: 2rem 0.5rem;
+    font-weight: bold;
+    font-size: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 4px #2222;
+}
+.add {
+    background: #1c7a06;
+    color: #FFF;
+}
+button.add[disabled=""], button.subtract[disabled=""] {
+    opacity: 0.5;
+}
+.subtract {
+    background: #B22222;
+    color: #FFF;
+}
