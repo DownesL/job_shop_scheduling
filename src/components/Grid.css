@@ -1,31 +1,8 @@
+
+
 .table {
     display: grid;
-    grid-auto-columns: minmax(100px, auto);
-}
-
-.gone {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-
-.tableRow {
-    grid-row: 2;
-    grid-column: unset;
-}
-
-.jobs.prim {
-    grid-row: 2;
-}
-
-.machines.prim {
-    grid-row: 1;
-}
-.sequence.prim {
-    grid-row: 2;
-}
-.sequence {
-    margin-left: 1rem;
+    width: 100vw;
 }
 
 .tableElement {
@@ -36,8 +13,26 @@
     height: 4rem;
     border: rgba(68, 68, 68, 0.41) solid 1px;
 }
-.tableElement h4, .tableElement p {
-    margin: 0;
+
+.sequence {
+    grid-column: 4 !important;
+}
+
+.machines.prim {
+    grid-row: 1;
+}
+
+.sequence.prim {
+    grid-row: 2;
+}
+
+.jobs.prim {
+    grid-row: 2;
+}
+
+.prim {
+    background: #1a4170;
+    color: #FFF;
 }
 
 .job {
@@ -52,10 +47,34 @@
     grid-column: 1;
 }
 
-.prim {
-    background: #1a4170;
-    color: #FFF;
+.tableElement h4, .tableElement p {
+    margin: 0;
 }
-.centerline {
-    background: #CCC;
+@media (min-width: 600px) {
+    .table {
+        display: grid;
+        width: 60vw;
+        margin-inline: auto;
+        grid-auto-columns: minmax(100px, auto);
+    }
+
+    .gone {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .tableRow {
+        grid-row: 2;
+        grid-column: unset;
+    }
+
+
+    .sequence {
+        margin-left: 1rem;
+    }
+
+
+    .centerline {
+        background: #CCC;
+    }
 }

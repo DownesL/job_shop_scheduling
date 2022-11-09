@@ -26,14 +26,14 @@ function percolateUp(queue, i) {
 export const dijkstra = (graph, start) => {
     const distance = new Map();
     const marked = new WeakSet();
-    // const index = new WeakMap();
+    const index = new WeakMap();
     const queue = new PriorityQueue((a, b) => distance.get(a) < distance.get(b));
 
     graph.nodes.forEach((neighbours, nodeID) => distance.set(nodeID, Infinity));
     distance.set(start, 0);
 
     queue.heapify([...graph.nodes.keys()]);
-    // queue.array.forEach((node, i) => index.set(node, i));
+    queue.array.forEach((node, i) => index.set(node, i));
 
     while(!queue.isEmpty()) {
         const node = queue.poll();
@@ -49,21 +49,21 @@ export const dijkstra = (graph, start) => {
             if (distance.get(node.id) <= newDist) return;
 
             distance.set(node.id, newDist);
-            // index.set(nodeID, percolateUp(queue, index.get(nodeID)))
+            index.set(node.id, percolateUp(queue, index.get(node.id)))
         })
 
-        // node.neighbors.forEach((weight, neighbor) => {
-        //     if(marked.has(neighbor))
-        //         return;
-        //
-        //     const newDist = nodeDist + weight;
-        //
-        //     if(distance.get(neighbor) <= newDist)
-        //         return;
-        //
-        //     distance.set(neighbor, newDist);
-        //     index.set(neighbor, percolateUp(queue, index.get(neighbor)));
-        // });
+        node.neighbors.forEach((weight, neighbor) => {
+            if(marked.has(neighbor))
+                return;
+
+            const newDist = nodeDist + weight;
+
+            if(distance.get(neighbor) <= newDist)
+                return;
+
+            distance.set(neighbor, newDist);
+            index.set(neighbor, percolateUp(queue, index.get(neighbor)));
+        });
     }
 
     return distance;

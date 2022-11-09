@@ -12,12 +12,24 @@ export default class Grid extends React.Component {
     };
 
     render() {
-        let machines = Array(this.props.machineAmount).fill(0).map((value, index) => String.fromCharCode(index + 97));
-        let jobs = Array(this.props.jobAmount).fill(0).map((value, index) => {
-            let job = {index: index, jobID: index + 1};
-            machines.forEach((value) => job[value] = Math.round(Math.random() * 15 + 1));
-            return job;
-        });
+        let randChosen = [];
+        let machines = Array(this.props.machineAmount)
+            .fill(0)
+            .map((value, index) => String.fromCharCode(index + 97));
+        let jobs = Array(this.props.jobAmount)
+            .fill(0)
+            .map((value, index) => {
+                let job = {index: index, jobID: index + 1};
+                for (let i = 0; i < this.props.machineAmount; i++) {
+                    let rand;
+                    do {
+                        rand = Math.round(Math.random() * (this.props.jobAmount*2) + 1)
+                    } while (randChosen.includes(rand))
+                    randChosen.push(rand);
+                    job[String.fromCharCode(i + 97)] = rand;
+                }
+                return job;
+            });
         let x = johnsonsAlgorithm(jobs);
         // const graph = parseGraph(jobs);
         // const dist = johnson(graph);
@@ -55,8 +67,8 @@ export default class Grid extends React.Component {
                         x.map((el, index) => (
                             <div className={"tableElement sequence"}
                                  style={{gridColumn: machines.length + 2, gridRow: index + 3}}>
-                                <h4>Machine: {el.machine}</h4>
-                                <p>Process (Time): {el.jobID} ({el.value})</p>
+                                <h4>Process: {el.jobID}</h4>
+                                <p>Because: {el.machine}={el.value}</p>
                             </div>
                         ))
                     }
